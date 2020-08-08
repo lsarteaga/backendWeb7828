@@ -14,11 +14,11 @@ router.post('/employees', async (req, res) => {
         console.log(newEmployee);
         const newDoc = await firebaseHelper.firestore.createNewDocument(db, collection, newEmployee);
         res.status(201).json(
-            Message('Employee Created', `Employee id: ${newDoc.id}`, 'Correct Process')
+            Message('Employee Created', `Employee id: ${newDoc.id}`, 'success')
         );
     } catch (error) {
-        res.status(401).json(
-            Message('Error', `An error has ocurred: ${error}`, 'Failed Process')
+        res.status(400).json(
+            Message('Error', `An error has ocurred: ${error}`, 'error')
         );
     }
 });
@@ -29,9 +29,9 @@ router.get('/employees/:id', (req, res) => {
         .then(doc => {
             let employeeQuery = Employee(doc, doc.id);
             console.log(employeeQuery);
-            res.status(201).json(employeeQuery);
+            res.status(200).json(employeeQuery);
         })
-        .catch(e => res.status(401).json(Message('Error', `An error has ocurred: ${e}`, 'Failed Process')));
+        .catch(e => res.status(400).json(Message('Error', `An error has ocurred: ${e}`, 'error')));
 });
 
 router.put('/employees/:id', (req, res) => {
@@ -40,11 +40,11 @@ router.put('/employees/:id', (req, res) => {
     firebaseHelper.firestore.updateDocument(db, collection, id, employee)
             .then(result => {
                 res.status(201).json(
-                    Message('Employee Updated', `Employee id: ${id}`, 'Correct Process')
+                    Message('Employee Updated', `Employee id: ${id}`, 'success')
                 );
             }).catch(e => {
-                res.status(401).json(
-                    Message('Error', `An error has ocurred: ${e}`, 'Failed Process')
+                res.status(400).json(
+                    Message('Error', `An error has ocurred: ${e}`, 'error')
                 );
             });
 });
@@ -54,11 +54,11 @@ router.delete('/employees/:id', async (req, res) => {
         const { id } = req.params;
         await firebaseHelper.firestore.deleteDocument(db, collection, id);
         res.status(201).json(
-            Message('Employee Deleted', `Deleted id: ${id}`, 'Correct Process')
+            Message('Employee Deleted', `Deleted id: ${id}`, 'success')
         );
     } catch (e) {
-        res.status(401).json(
-            Message('Error', `An error has ocurred: ${e}`, 'Failed Process')
+        res.status(400).json(
+            Message('Error', `An error has ocurred: ${e}`, 'error')
         );
     }
 });
@@ -84,3 +84,4 @@ router.get('/count/employees', (req, res) => {
 
 
 export { router };
+

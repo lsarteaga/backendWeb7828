@@ -22,11 +22,11 @@ routes.post('/projects', async (req, res) => {
         console.log(newProject);
         const id = (await db.collection(collection).add(newProject)).id;
         res.status(201).json(
-            Message('Project Created', `Project id: ${id}`, 'Correct Process')
+            Message('Project Created', `Project id: ${id}`, 'success')
         );
     } catch (error) {
         res.status(401).json(
-            Message('Error', `An error has ocurred: ${error}`, 'Failed Process')
+            Message('Error', `An error has ocurred: ${error}`, 'error')
         );
     }
 });
@@ -37,9 +37,9 @@ routes.get('/projects/:id', (req, res) => {
         .then(doc => {
             let projectQuery = Project(doc, doc.id);
             console.log(projectQuery);
-            res.status(201).json(projectQuery);
+            res.status(200).json(projectQuery);
         })
-        .catch(e => res.status(401).json(Message('Error', `An error has ocurred: ${e}`, 'Failed Process')));
+        .catch(e => res.status(400).json(Message('Error', `An error has ocurred: ${e}`, 'error')));
 });
 
 routes.put('/projects/:id', (req, res) => {
@@ -48,11 +48,11 @@ routes.put('/projects/:id', (req, res) => {
     firebaseHelper.firestore.updateDocument(db, collection, id, project)
         .then(result => {
             res.status(201).json(
-                Message('Project Updated', `Projects id: ${id}`, 'Correct Process')
+                Message('Project Updated', `Projects id: ${id}`, 'success')
             );
         }).catch(e => {
-        res.status(401).json(
-            Message('Error', `An error has ocurred: ${e}`, 'Failed Process')
+        res.status(400).json(
+            Message('Error', `An error has ocurred: ${e}`, 'error')
         );
     });
 });
@@ -62,11 +62,11 @@ routes.delete('/projects/:id', async (req, res) => {
         const { id } = req.params;
         await firebaseHelper.firestore.deleteDocument(db, collection, id);
         res.status(201).json(
-            Message('Project Deleted', `Deleted id: ${id}`, 'Correct Process')
+            Message('Project Deleted', `Deleted id: ${id}`, 'success')
         );
     } catch (e) {
-        res.status(401).json(
-            Message('Error', `An error has ocurred: ${e}`, 'Failed Process')
+        res.status(400).json(
+            Message('Error', `An error has ocurred: ${e}`, 'error')
         );
     }
 });
@@ -91,3 +91,4 @@ routes.get('/count/projects', (req, res) => {
 });
 
 export { routes };
+

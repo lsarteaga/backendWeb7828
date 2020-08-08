@@ -13,19 +13,13 @@ router.post('/clients', async (req, res) => {
     try {
        const newClient = Client(req.body);
        console.log(newClient);
-       await firebaseHelper.firestore
-           .createNewDocument(db, collection, newClient)
-           .then(result => {
-               res.json('si valio');
-           })
-           .catch(e => {
-               res.json('erro!!!');
-           });
-       /*res.status(201).json(
-         Message('Client Added', `Client id: ${clientAdded.id}`, 'Correct Process')
-       );*/
+       const clientAdded = await firebaseHelper.firestore
+           .createNewDocument(db, collection, newClient);
+       res.status(201).json(
+         Message('Client Added', `Client id: ${clientAdded.id}`, 'success')
+       );
     } catch (e) {
-        res.status(401).json(Message('Error',`An error has ocurred: ${e}`,'error'));
+        res.status(400).json(Message('Error',`An error has ocurred: ${e}`,'error'));
     }
 });
 
@@ -35,9 +29,9 @@ router.get('/clients/:id', (req, res) => {
         .then(doc => {
             let clientQuery = Client(doc, doc.id);
             console.log(clientQuery);
-            res.status(201).json(clientQuery);
+            res.status(200).json(clientQuery);
         })
-        .catch(e => res.status(401).json(Message('Error',`An error has ocurred: ${e}`,'error')));
+        .catch(e => res.status(400).json(Message('Error',`An error has ocurred: ${e}`,'error')));
 });
 
 router.put('/clients/:id', async (req, res) => {
@@ -46,11 +40,11 @@ router.put('/clients/:id', async (req, res) => {
    firebaseHelper.firestore.updateDocument(db, collection, id, client)
        .then(result => {
            res.status(201).json(
-               Message('Client Updated', `Client id: ${id}`, 'Correct Process')
+               Message('Client Updated', `Client id: ${id}`, 'success')
            );
        })
        .catch(e => {
-           res.status(401).json(Message('Error',`An error has ocurred: ${e}`,'error'))
+           res.status(400).json(Message('Error',`An error has ocurred: ${e}`,'error'))
        });
 });
 
@@ -59,10 +53,10 @@ router.delete('/clients/:id', async (req, res) => {
        const { id } = req.params;
        await firebaseHelper.firestore.deleteDocument(db, collection, id);
        res.status(201).json(
-           Message('Client Deleted', `Deleted id: ${id}`,'Correct Process')
+           Message('Client Deleted', `Deleted id: ${id}`,'success')
        );
    } catch (e) {
-       res.status(401).json(Message('Error',`An error has ocurred: ${e}`,'error'));
+       res.status(400).json(Message('Error',`An error has ocurred: ${e}`,'error'));
    }
 });
 
