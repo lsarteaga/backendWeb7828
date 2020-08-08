@@ -1,0 +1,12 @@
+## Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Typescript v1 declaration files
+typings/
+
+node_modules/
+proyecto-javascript-8ecde-0ff17cfd2045.json
+node_modules library root/
+
+
