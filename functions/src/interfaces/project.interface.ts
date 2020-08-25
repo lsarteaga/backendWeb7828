@@ -1,44 +1,33 @@
-import { ClientInterface } from "./client.interface";
 import { EmployeeInterface } from "./employee.interface";
+import { AdvanceInterface } from "./advance.interface";
 
 export interface ProjectInterface {
   idproject?: string;
-  kind: string;
-  dateInit: Date;
-  dateFinish: Date;
-  direction: string;
+  address: string;
   status: string;
-  cost: number;
   description: string;
-  idemployee: string;
-  idclient: string;
-  client?: ClientInterface;
-  employee?: EmployeeInterface;
+  projectType: string;
+  employees: Array<EmployeeInterface>;
+  advances: Array<AdvanceInterface>;
 }
 
 export function Project(data: any, id?: string) {
   const {
-    kind,
-    dateInit,
-    dateFinish,
-    direction,
+    address,
     status,
-    cost,
     description,
-    idemployee,
-    idclient,
+    projectType,
+    employees,
+    advances,
   } = data;
   let object: ProjectInterface = {
     idproject: id,
-    kind: kind,
-    dateInit: dateInit,
-    dateFinish: dateFinish,
-    direction: direction,
+    address: address,
     status: status,
-    cost: cost,
     description: description,
-    idemployee: idemployee,
-    idclient: idclient,
+    projectType: projectType,
+    employees: employees,
+    advances: advances,
   };
   return object;
 }
