@@ -4,11 +4,11 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 import * as cors from 'cors';
 
-admin.initializeApp(functions.config().firebase);
-/*admin.initializeApp({
+//admin.initializeApp(functions.config().firebase);
+admin.initializeApp({
     credential: admin.credential.applicationDefault(),
     databaseURL: "https://proyecto-javascript-8ecde.firebaseio.com"
-});*/
+});
 
 const db = admin.firestore();
 db.settings({ignoreUndefinedProperties : true});
