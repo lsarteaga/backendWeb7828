@@ -16,19 +16,19 @@ export async function createContract(request: Request, response: Response) {
     console.log(newContract);
     const idemployee = newContract.idemployee;
     const docEmployee = await db.collection("employees").doc(idemployee).get();
-    newContract.contractor = Employee(docEmployee, docEmployee.id);
+    newContract.contractor = Employee(docEmployee.data(), docEmployee.id);
     const idclient = newContract.idclient;
     const docClient = await db.collection("clients").doc(idclient).get();
     console.log(idemployee);
     console.log(idclient);
-    newContract.client = Client(docClient, docClient.id);
-    const contractAdded = await db.collection(collection).add(newContract);
+    newContract.client = Client(docClient.data(), docClient.id);
+    const contractAdded = (await db.collection(collection).add(newContract)).id;
     return response
       .status(201)
       .json(
         Message(
           "Contrato agregado",
-          `Contrato con id: ${contractAdded.id} agregado`,
+          `Contrato con id: ${contractAdded} agregado`,
           "success"
         )
       );

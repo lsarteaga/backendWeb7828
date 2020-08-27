@@ -1,5 +1,5 @@
-import { Client, ClientInterface } from "./client.interface";
-import { Employee, EmployeeInterface } from "./employee.interface";
+import { ClientInterface } from "./client.interface";
+import { EmployeeInterface } from "./employee.interface";
 
 export interface ContractInterface {
   idcontract?: string;
@@ -21,8 +21,8 @@ export function Contract(data: any, id?: string) {
     endDate: endDate,
     idemployee: idemployee,
     idclient: idclient,
-    contractor: Employee(data.contractor, data.contractor.id),
-    client: Client(data.client, data.client.id),
+    /*contractor: Employee(data.contractor, data.contractor.id),
+        client: Client(data.client, data.client.id),*/
   };
   return object;
 }
