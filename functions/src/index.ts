@@ -6,6 +6,8 @@ import * as cors from "cors";
 import { clientRoutes } from "./routes/client.routes";
 import { employeeRoutes } from "./routes/employee.routes";
 import { projectRoutes } from "./routes/project.routes";
+import { advanceRoutes } from "./routes/advance.routes";
+import { contractRoutes } from "./routes/contract.routes";
 
 // admin.initializeApp(functions.config().firebase);
 admin.initializeApp({
@@ -17,11 +19,17 @@ const db = admin.firestore();
 db.settings({ ignoreUndefinedProperties: true, timestampsInSnapshot: true });
 
 const server = express();
-server.use(cors({ origin: true }));
-server.use(bodyParser.json());
+server.use(bodyParser());
 server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+
+server.use(cors({ origin: true }));
+
 clientRoutes(server);
 employeeRoutes(server);
 projectRoutes(server);
+contractRoutes(server);
+advanceRoutes(server);
+
 export const api = functions.https.onRequest(server);
 export { db };
