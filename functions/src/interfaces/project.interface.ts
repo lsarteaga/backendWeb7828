@@ -1,6 +1,6 @@
 import { EmployeeInterface } from "./employee.interface";
 import { AdvanceInterface } from "./advance.interface";
-import { Contract, ContractInterface } from "./contract.interface";
+import { ContractInterface } from "./contract.interface";
 
 export interface ProjectInterface {
   idproject?: string;
@@ -33,7 +33,6 @@ export function Project(data: any, id?: string) {
     employees: employees,
     advances: advances,
     idcontract: idcontract,
-    contract: Contract(data.contract, data.contract.id),
   };
   return object;
 }

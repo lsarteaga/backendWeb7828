@@ -13,7 +13,6 @@ export async function createContract(request: Request, response: Response) {
     console.log("entre al try");
     console.log(request.body);
     const newContract = Contract(request.body);
-    console.log(newContract);
     const idemployee = newContract.idemployee;
     const docEmployee = await db.collection("employees").doc(idemployee).get();
     newContract.contractor = Employee(docEmployee.data(), docEmployee.id);

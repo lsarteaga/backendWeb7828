@@ -1,4 +1,4 @@
-import { Employee, EmployeeInterface } from "./employee.interface";
+import { EmployeeInterface } from "./employee.interface";
 
 export interface AdvanceInterface {
   idadvance?: string;
@@ -15,7 +15,6 @@ export function Advance(data: any, id?: string) {
     description: description,
     date: date,
     idemployee: idemployee,
-    employee: Employee(data.employee, data.employee.id),
   };
   return object;
 }
