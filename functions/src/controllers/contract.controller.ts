@@ -15,12 +15,12 @@ export async function createContract(request: Request, response: Response) {
     const newContract = Contract(request.body);
     const idemployee = newContract.idemployee;
     const docEmployee = await db.collection("employees").doc(idemployee).get();
-    newContract.contractor = Employee(docEmployee.data(), docEmployee.id);
+    newContract.contractor = Employee(docEmployee.data());
     const idclient = newContract.idclient;
     const docClient = await db.collection("clients").doc(idclient).get();
     console.log(idemployee);
     console.log(idclient);
-    newContract.client = Client(docClient.data(), docClient.id);
+    newContract.client = Client(docClient.data());
     const contractAdded = (await db.collection(collection).add(newContract)).id;
     return response
       .status(201)

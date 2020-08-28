@@ -11,8 +11,12 @@ export async function createProject(request: Request, response: Response) {
   try {
     const newProject = Project(request.body);
     const idcontract = newProject.idcontract;
+    //
+
+    //
     const docContract = await db.collection("contracts").doc(idcontract).get();
-    newProject.contract = Contract(docContract.data(), docContract.id);
+    console.log(docContract);
+    newProject.contract = Contract(docContract.data());
     const projectAdded = await db.collection(collection).add(newProject);
     return response
       .status(201)

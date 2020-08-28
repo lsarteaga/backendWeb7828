@@ -12,7 +12,7 @@ export async function createAdvance(request: Request, response: Response) {
     const newAdvance = Advance(request.body);
     const idemployee = newAdvance.idemployee;
     const docEmployee = await db.collection("employees").doc(idemployee).get();
-    newAdvance.employee = Employee(docEmployee.data(), idemployee);
+    newAdvance.employee = Employee(docEmployee.data());
     const advanceAdded = await db.collection(collection).add(newAdvance);
     return response
       .status(201)
