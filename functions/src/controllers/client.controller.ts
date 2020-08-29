@@ -6,11 +6,11 @@ import { handleError } from "../interfaces/handler";
 
 const collection = "clients";
 
-export async function createClient(req: Request, res: Response) {
+export async function createClient(request: Request, response: Response) {
   try {
-    const newClient = Client(req.body);
+    const newClient = Client(request.body);
     const clientAdded = await db.collection(collection).add(newClient);
-    return res
+    return response
       .status(201)
       .json(
         Message(
@@ -20,7 +20,7 @@ export async function createClient(req: Request, res: Response) {
         )
       );
   } catch (error) {
-    return handleError(res, error);
+    return handleError(response, error);
   }
 }
 
