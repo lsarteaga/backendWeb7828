@@ -65,3 +65,5 @@ node_modules/
 .env
 proyecto-javascript-8ecde-0ff17cfd2045.json
 .idea/
+
+public/images/
