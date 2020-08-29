@@ -1,37 +1,38 @@
-import {ClientInterface} from "./client.interface";
-import {EmployeeInterface} from "./employee.interface";
+import { EmployeeInterface } from "./employee.interface";
+import { AdvanceInterface } from "./advance.interface";
+import { ContractInterface } from "./contract.interface";
 
 export interface ProjectInterface {
-    idproject?: string;
-    kind: string;
-    dateInit: string;
-    dateFinish: string;
-    direction: string;
-    state: string;
-    cost: number;
-    description: string;
-    idemployee: string;
-    idclient: string;
-    client?: ClientInterface;
-    employee?: EmployeeInterface;
+  idproject?: string;
+  address: string;
+  status: string;
+  description: string;
+  projectType: string;
+  employees: Array<EmployeeInterface>;
+  advances: Array<AdvanceInterface>;
+  idcontract: string;
+  contract?: ContractInterface;
 }
 
 export function Project(data: any, id?: string) {
-    const { kind, dateInit, dateFinish, direction, state, cost, description, idemployee, idclient } = data;
-    let object: ProjectInterface = {
-        idproject: id,
-        kind: kind === undefined ? null : kind,
-        dateInit: dateInit === undefined ? null : dateInit,
-        dateFinish: dateFinish === undefined ? null : dateFinish,
-        direction: direction === undefined ? null : direction,
-        state: state === undefined ? null : state,
-        cost: cost === undefined ? null : cost,
-        description: description === undefined ? null : description,
-        idemployee: idemployee === undefined ? null : idemployee,
-        idclient: idclient === undefined ? null : idclient
-    };
-    return object;
+  const {
+    address,
+    status,
+    description,
+    projectType,
+    employees,
+    advances,
+    idcontract,
+  } = data;
+  let object: ProjectInterface = {
+    idproject: id,
+    address: address,
+    status: status,
+    description: description,
+    projectType: projectType,
+    employees: employees,
+    advances: advances,
+    idcontract: idcontract,
+  };
+  return object;
 }
-
-
-
