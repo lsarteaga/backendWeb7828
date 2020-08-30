@@ -5,6 +5,7 @@ import {
   listProject,
   retrieveProject,
   updateProject,
+  listProjectContract,
 } from "../controllers/project.controller";
 import { Application } from "express";
 
@@ -15,4 +16,5 @@ export function projectRoutes(app: Application) {
   app.delete("/api/projects/:id", deleteProject);
   app.get("/api/count/projects", countProject);
   app.get("/api/page/projects/:page/:limit", listProject);
+  app.get("/api/contract/projects/:id/:page/:limit", listProjectContract);
 }

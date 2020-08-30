@@ -116,3 +116,26 @@ export async function listProject(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
+export async function listProjectContract(
+  request: Request,
+  response: Response
+) {
+  try {
+    const idproject = request.params.id;
+    let limit = parseInt(request.params.limit);
+    let page = parseInt(request.params.page);
+    let avoid = page == 1 ? 0 : (page - 1) * limit;
+    let snapshot = await db
+      .collection(collection)
+      .orderBy("projectType")
+      .where("idproject", "==", idproject)
+      .offset(avoid)
+      .get();
+    return response
+      .status(200)
+      .json(snapshot.docs.map((doc) => Project(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}

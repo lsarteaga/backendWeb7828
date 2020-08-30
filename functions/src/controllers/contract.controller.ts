@@ -122,3 +122,27 @@ export async function listContract(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
+export async function listContractEmloyee(
+  request: Request,
+  response: Response
+) {
+  try {
+    let idemployee = request.params.id;
+    let page = parseInt(request.params.page);
+    let limit = parseInt(request.params.limit);
+    let avoid = page == 1 ? 0 : (page - 1) * limit;
+    let snapshot = await db
+      .collection(collection)
+      .orderBy("startDate")
+      .where("idemployee", "==", idemployee)
+      .offset(avoid)
+      .limit(limit)
+      .get();
+    return response
+      .status(200)
+      .json(snapshot.docs.map((doc) => Contract(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}

@@ -5,6 +5,7 @@ import {
   listContract,
   retrieveContract,
   updateContract,
+  listContractEmloyee,
 } from "../controllers/contract.controller";
 import { Application } from "express";
 
@@ -15,4 +16,5 @@ export function contractRoutes(app: Application) {
   app.delete("/api/contracts/:id", deleteContract);
   app.get("/api/count/contracts", countContract);
   app.get("/api/page/contracts/:page/:limit", listContract);
+  app.get("/api/employee/contracts/:id/:page/:limit", listContractEmloyee);
 }
