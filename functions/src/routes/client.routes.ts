@@ -16,5 +16,5 @@ export function clientRoutes(app: Application) {
   app.delete("/api/clients/:id", deleteClient);
   app.get("/api/page/clients/:page/:limit", listClient);
   app.get("/api/count/clients", countClient);
-  app.get("/api/clients/list", listClientAll);
+  app.get("/api/records/clients", listClientAll);
 }

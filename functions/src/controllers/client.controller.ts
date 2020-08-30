@@ -114,11 +114,25 @@ export async function countClient(req: Request, res: Response) {
 
 export async function listClientAll(req: Request, res: Response) {
   try {
-    let snapshot = await db.collection(collection).get();
-    console.log("si pase del snapshot");
+    let snapshot = await db.collection(collection).orderBy("surname").get();
     return res
       .status(200)
       .json(snapshot.docs.map((doc) => Client(doc.data(), doc.id)));
+    /* const clientsRef = await db.collection(collection);
+    clientsRef.onSnapshot((snap) => {
+      const clientes: any[] = [];
+      snap.forEach((snapHijo) => {
+        clientes.push({
+          id: snapHijo.id,
+          ...snapHijo.data(),
+        });
+      });
+      return console.log(clientes);
+    });
+
+    return res
+      .status(200)
+      .json(clientsRef.docs.map((doc) => Client(doc.data(), doc.id)));*/
   } catch (error) {
     return handleError(res, error);
   }
