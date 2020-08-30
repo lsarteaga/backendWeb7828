@@ -38,7 +38,7 @@ export async function retrieveClient(req: Request, res: Response) {
           )
         );
     }
-    return res.status(200).json(Client(doc, doc.id));
+    return res.status(200).json(Client(doc.data(), doc.id));
   } catch (error) {
     return handleError(res, error);
   }
@@ -107,6 +107,18 @@ export async function countClient(req: Request, res: Response) {
     return res.status(200).json({
       numberDocs: snapshot.size,
     });
+  } catch (error) {
+    return handleError(res, error);
+  }
+}
+
+export async function listClientAll(req: Request, res: Response) {
+  try {
+    let snapshot = await db.collection(collection).get();
+    console.log("si pase del snapshot");
+    return res
+      .status(200)
+      .json(snapshot.docs.map((doc) => Client(doc.data(), doc.id)));
   } catch (error) {
     return handleError(res, error);
   }

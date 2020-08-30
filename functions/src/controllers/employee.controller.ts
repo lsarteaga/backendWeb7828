@@ -38,7 +38,7 @@ export async function retrieveEmployee(request: Request, response: Response) {
           )
         );
     }
-    return response.status(200).json(Employee(doc, doc.id));
+    return response.status(200).json(Employee(doc.data(), doc.id));
   } catch (error) {
     return handleError(response, error);
   }
@@ -64,6 +64,7 @@ export async function updateEmployee(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
 export async function deleteEmployee(request: Request, response: Response) {
   try {
     await db.collection(collection).doc(request.params.id).delete();
@@ -80,6 +81,7 @@ export async function deleteEmployee(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
 export async function listEmployee(request: Request, response: Response) {
   try {
     let page = parseInt(request.params.page);
@@ -98,6 +100,7 @@ export async function listEmployee(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
 export async function countEmployee(request: Request, response: Response) {
   try {
     let snapshot = await db.collection(collection).get();

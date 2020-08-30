@@ -42,7 +42,7 @@ export async function retrieveAdvance(request: Request, response: Response) {
           )
         );
     }
-    return response.status(200).json(Advance(doc, doc.id));
+    return response.status(200).json(Advance(doc.data(), doc.id));
   } catch (error) {
     return handleError(response, error);
   }
@@ -85,6 +85,7 @@ export async function deleteAdvance(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
 export async function listAdvance(request: Request, response: Response) {
   try {
     let page = parseInt(request.params.page);

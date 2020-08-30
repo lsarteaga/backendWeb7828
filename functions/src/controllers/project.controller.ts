@@ -46,7 +46,7 @@ export async function retrieveProject(request: Request, response: Response) {
           )
         );
     }
-    return response.status(200).json(Project(doc, doc.id));
+    return response.status(200).json(Project(doc.data(), doc.id));
   } catch (error) {
     return handleError(response, error);
   }
