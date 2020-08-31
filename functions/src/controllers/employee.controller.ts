@@ -109,3 +109,13 @@ export async function countEmployee(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+export async function listEmployeeAll(request: Request, response: Response) {
+  try {
+    let snapshot = await db.collection(collection).orderBy("surname").get();
+    return response
+      .status(200)
+      .json(snapshot.docs.map((doc) => Employee(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}

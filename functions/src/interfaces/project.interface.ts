@@ -23,6 +23,7 @@ export function Project(data: any, id?: string) {
     employees,
     advances,
     idcontract,
+    contract,
   } = data;
   let object: ProjectInterface = {
     idproject: id,
@@ -33,6 +34,7 @@ export function Project(data: any, id?: string) {
     employees: employees,
     advances: advances,
     idcontract: idcontract,
+    contract: contract,
   };
   return object;
 }

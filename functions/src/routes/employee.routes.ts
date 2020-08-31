@@ -6,6 +6,7 @@ import {
   listEmployee,
   updateEmployee,
   retrieveEmployee,
+  listEmployeeAll,
 } from "../controllers/employee.controller";
 
 export function employeeRoutes(app: Application) {
@@ -15,4 +16,5 @@ export function employeeRoutes(app: Application) {
   app.delete("/api/employees/:id", deleteEmployee);
   app.get("/api/count/employees", countEmployee);
   app.get("/api/page/employees/:page/:limit", listEmployee);
+  app.get("/api/records/employees", listEmployeeAll);
 }

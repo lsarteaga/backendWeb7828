@@ -10,7 +10,7 @@ import { advanceRoutes } from "./routes/advance.routes";
 import { contractRoutes } from "./routes/contract.routes";
 import { dealsRoutes } from "./routes/deals.routes";
 
-// admin.initializeApp(functions.config().firebase);
+//admin.initializeApp(functions.config().firebase);
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
   databaseURL: "https://proyecto-javascript-8ecde.firebaseio.com",

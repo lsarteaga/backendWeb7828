@@ -13,7 +13,15 @@ export interface ContractInterface {
 }
 
 export function Contract(data: any, id?: string) {
-  const { cost, startDate, endDate, idemployee, idclient } = data;
+  const {
+    cost,
+    startDate,
+    endDate,
+    idemployee,
+    idclient,
+    client,
+    contractor,
+  } = data;
   let object: ContractInterface = {
     idcontract: id,
     cost: cost,
@@ -21,6 +29,8 @@ export function Contract(data: any, id?: string) {
     endDate: endDate,
     idemployee: idemployee,
     idclient: idclient,
+    client: client,
+    contractor: contractor,
   };
   return object;
 }

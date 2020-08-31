@@ -122,19 +122,34 @@ export async function listProjectContract(
   response: Response
 ) {
   try {
-    const idproject = request.params.id;
-    let limit = parseInt(request.params.limit);
+    let idcontract = request.params.id;
     let page = parseInt(request.params.page);
+    let limit = parseInt(request.params.limit);
     let avoid = page == 1 ? 0 : (page - 1) * limit;
     let snapshot = await db
       .collection(collection)
-      .orderBy("projectType")
-      .where("idproject", "==", idproject)
+      .where("idcontract", "==", idcontract)
       .offset(avoid)
+      .limit(limit)
       .get();
     return response
       .status(200)
       .json(snapshot.docs.map((doc) => Project(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}
+export async function countProjectContract(
+  request: Request,
+  response: Response
+) {
+  try {
+    const idcontract = request.params.id;
+    let snapshot = await db
+      .collection(collection)
+      .where("idcontract", "==", idcontract)
+      .get();
+    return response.status(200).json({ numberDocs: snapshot.size });
   } catch (error) {
     return handleError(response, error);
   }
