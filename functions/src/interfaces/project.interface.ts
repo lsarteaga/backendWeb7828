@@ -12,9 +12,11 @@ export interface ProjectInterface {
   advances: Array<AdvanceInterface>;
   idcontract: string;
   contract?: ContractInterface;
+  created_by?: string;
+  created_at: string;
 }
 
-export function Project(data: any, id?: string) {
+export function Project(data: any, id?: string, username?: string) {
   const {
     address,
     status,
@@ -35,6 +37,8 @@ export function Project(data: any, id?: string) {
     advances: advances,
     idcontract: idcontract,
     contract: contract,
+    created_by: username,
+    created_at: new Date().toUTCString(),
   };
   return object;
 }

@@ -9,6 +9,7 @@ import { projectRoutes } from "./routes/project.routes";
 import { advanceRoutes } from "./routes/advance.routes";
 import { contractRoutes } from "./routes/contract.routes";
 import { dealsRoutes } from "./routes/deals.routes";
+import { authRoutes } from "./routes/auth.routes";
 
 // admin.initializeApp(functions.config().firebase);
 admin.initializeApp({
@@ -32,6 +33,7 @@ projectRoutes(server);
 contractRoutes(server);
 advanceRoutes(server);
 dealsRoutes(server);
+authRoutes(server);
 
 export const api = functions.https.onRequest(server);
 export { db };

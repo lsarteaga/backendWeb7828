@@ -10,9 +10,11 @@ export interface ContractInterface {
   idclient: string;
   client?: ClientInterface;
   contractor?: EmployeeInterface;
+  created_by?: string;
+  created_at: string;
 }
 
-export function Contract(data: any, id?: string) {
+export function Contract(data: any, id?: string, username?: string) {
   const {
     cost,
     startDate,
@@ -31,6 +33,8 @@ export function Contract(data: any, id?: string) {
     idclient: idclient,
     client: client,
     contractor: contractor,
+    created_by: username,
+    created_at: new Date().toUTCString(),
   };
   return object;
 }
