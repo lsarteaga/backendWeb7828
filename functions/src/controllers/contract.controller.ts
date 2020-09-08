@@ -161,3 +161,14 @@ export async function countContractEmployee(
     return handleError(response, error);
   }
 }
+
+export async function listContractsAll(request: Request, response: Response) {
+  try {
+    let snapshot = await db.collection(collection).get();
+    return response
+      .status(200)
+      .json(snapshot.docs.map((doc) => Contract(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}

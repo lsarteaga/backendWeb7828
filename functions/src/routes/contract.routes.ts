@@ -7,6 +7,7 @@ import {
   updateContract,
   listContractEmloyee,
   countContractEmployee,
+  listContractsAll,
 } from "../controllers/contract.controller";
 import { Application } from "express";
 import { isAuthenticated, isAuthorized } from "../midlewares/midleware";
@@ -32,4 +33,5 @@ export function contractRoutes(app: Application) {
   app.get("/api/page/contracts/:page/:limit", listContract);
   app.get("/api/employee/contracts/:id/:page/:limit", listContractEmloyee);
   app.get("/api/employee/count/contracts/:id/", countContractEmployee);
+  app.get("/api/records/contracts", listContractsAll);
 }
