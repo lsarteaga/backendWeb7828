@@ -9,6 +9,7 @@ import {
   countProjectContract,
   listProjectsAll,
   countProjectType,
+  countProjectStatus,
 } from "../controllers/project.controller";
 import { Application } from "express";
 import { isAuthenticated, isAuthorized } from "../midlewares/midleware";
@@ -36,4 +37,5 @@ export function projectRoutes(app: Application) {
   app.get("/api/contract/count/projects/:id", countProjectContract);
   app.get("/api/records/projects", listProjectsAll);
   app.get("/api/type/projects", countProjectType);
+  app.get("/api/status/projects", countProjectStatus);
 }

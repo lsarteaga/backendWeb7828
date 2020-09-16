@@ -182,13 +182,57 @@ export async function countProjectType(request: Request, response: Response) {
       .collection(collection)
       .where("projectType", "==", "Electricidad")
       .get();
-    return response
-      .status(200)
-      .json({
-        construccion: snapshot.size,
-        alcantarillado: snapshot2.size,
-        electricidad: snapshot3.size,
-      });
+    return response.status(200).json({
+      construccion: snapshot.size,
+      alcantarillado: snapshot2.size,
+      electricidad: snapshot3.size,
+    });
+  } catch (error) {
+    return handleError(response, error);
+  }
+}
+
+export async function countProjectStatus(request: Request, response: Response) {
+  try {
+    const snapshot = await db
+      .collection(collection)
+      .where("status", "==", "En Progeso")
+      .where("projectType", "==", "Construccion")
+      .get();
+    const snapshot2 = await db
+      .collection(collection)
+      .where("projectType", "==", "Alcantarillado")
+      .where("status", "==", "En Progeso")
+      .get();
+    const snapshot3 = await db
+      .collection(collection)
+      .where("projectType", "==", "Electricidad")
+      .where("status", "==", "En Progeso")
+      .get();
+
+    const snapshot4 = await db
+      .collection(collection)
+      .where("projectType", "==", "Electricidad")
+      .where("status", "==", "Finalizado")
+      .get();
+    const snapshot5 = await db
+      .collection(collection)
+      .where("projectType", "==", "Alcantarillado")
+      .where("status", "==", "Finalizado")
+      .get();
+    const snapshot6 = await db
+      .collection(collection)
+      .where("projectType", "==", "Construccion")
+      .where("status", "==", "Finalizado")
+      .get();
+    return response.status(200).json({
+      progresoConstruccion: snapshot.size,
+      finalizadoConstruccion: snapshot6.size,
+      progresoAlcantarillado: snapshot2.size,
+      finalizaAlcantarillado: snapshot5.size,
+      progresoElectricidad: snapshot3.size,
+      finalizadoElectricidad: snapshot4.size,
+    });
   } catch (error) {
     return handleError(response, error);
   }
