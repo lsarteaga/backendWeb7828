@@ -155,3 +155,14 @@ export async function countProjectContract(
     return handleError(response, error);
   }
 }
+
+export async function listProjectsAll(request: Request, response: Response) {
+  try {
+    let snapshot = await db.collection(collection).get();
+    return response
+      .status(200)
+      .json(snapshot.docs.map((doc) => Project(doc.data(), doc.id)));
+  } catch (error) {
+    return handleError(response, error);
+  }
+}

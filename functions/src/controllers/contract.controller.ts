@@ -161,6 +161,7 @@ export async function countContractEmployee(
     return handleError(response, error);
   }
 }
+// ruta utilizada en los reportes
 
 export async function listContractsAll(request: Request, response: Response) {
   try {

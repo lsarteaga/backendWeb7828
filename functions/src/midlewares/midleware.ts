@@ -19,7 +19,7 @@ export async function isAuthenticated(
         Message("Unauthorized", "Not start validation authorization", "warning")
       );
   }
-  const split = authorization.split("Bearer");
+  const split = authorization.split("Bearer ");
   if (split.length !== 2) {
     return response
       .status(401)

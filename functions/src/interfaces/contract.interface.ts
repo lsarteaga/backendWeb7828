@@ -4,6 +4,7 @@ import { EmployeeInterface } from "./employee.interface";
 export interface ContractInterface {
   idcontract?: string;
   cost: number;
+  title: string;
   startDate: string;
   endDate: string;
   idemployee: string;
@@ -17,6 +18,7 @@ export interface ContractInterface {
 export function Contract(data: any, id?: string, username?: string) {
   const {
     cost,
+    title,
     startDate,
     endDate,
     idemployee,
@@ -27,6 +29,7 @@ export function Contract(data: any, id?: string, username?: string) {
   let object: ContractInterface = {
     idcontract: id,
     cost: cost,
+    title: title,
     startDate: startDate,
     endDate: endDate,
     idemployee: idemployee,
