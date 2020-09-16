@@ -166,3 +166,30 @@ export async function listProjectsAll(request: Request, response: Response) {
     return handleError(response, error);
   }
 }
+
+// funcion para obtener cantidad de un tipo de proyecto especifico
+export async function countProjectType(request: Request, response: Response) {
+  try {
+    const snapshot = await db
+      .collection(collection)
+      .where("projectType", "==", "Construccion")
+      .get();
+    const snapshot2 = await db
+      .collection(collection)
+      .where("projectType", "==", "Alcantarillado")
+      .get();
+    const snapshot3 = await db
+      .collection(collection)
+      .where("projectType", "==", "Electricidad")
+      .get();
+    return response
+      .status(200)
+      .json({
+        construccion: snapshot.size,
+        alcantarillado: snapshot2.size,
+        electricidad: snapshot3.size,
+      });
+  } catch (error) {
+    return handleError(response, error);
+  }
+}
